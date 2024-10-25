@@ -1,0 +1,13 @@
+______________________________________Apuntes CSS________________________________
+
+justify-content: flex-end; // Alinea elementos al lado derecho del contenedor.
+justify-content: center	   // Alinea elementos en el centro del contenedor.
+justify-content: space-around;	// Muestra elementos con la misma separación alrededor de ellos.
+justify-content: flex-start: Alinea elementos al lado izquierdo del
+justify-content: space-between; //Muestra elementos con la misma distancia entre ellos.
+
+align-items: flex-start //Alinea elementos a la parte superior del contenedor.
+align-items:flex-end //Alinea elementos a la parte inferior del contenedor.
+align-items: center //Alinea elementos en el centro (verticalmente hablando) del contenedor.
+align-items: baseline //Muestra elementos en la línea base del contenedor
+align-items: stretch //Elementos se estiran para ajustarse al contenedor.

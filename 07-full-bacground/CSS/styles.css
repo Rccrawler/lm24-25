@@ -1,0 +1,10 @@
+#container p {
+    color: azure;
+}
+#container{
+    background-color: rgb(75, 117, 103);
+}
+body{
+    background-image: url('../img/tux.png');
+    background-repeat: no-repeat;
+}
