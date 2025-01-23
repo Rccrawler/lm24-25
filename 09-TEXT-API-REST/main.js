@@ -1,49 +1,63 @@
-function cargarPokemons(){
+function cargarPokemons() {
     fetch("https://pokeapi.co/api/v2/pokemon/")
-//fetch(urlObtenerListaPokemon)
-    .then(res=>res.json())
-    .then(res=>{
-        console.log(res)
-        let listaPokemon = res.results
-        console.log(listaPokemon)
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            let listaPokemon = res.results;
 
-        //poner el codigo aqui
-    });
-}
+            // Selecciona el contenedor en el HTML
+            let contenedor = document.getElementById("resultado");
 
+            // Limpia el contenido previo
+            contenedor.innerHTML = "";
 
-function cargarPeliculas(){
-    fetch("http://127.0.0.1:3000/peliculas")
-        .then(res=>res.json())
-        .then(res=>{
-            console.log(res);
+            // Añade los Pokemons al contenedor
+            listaPokemon.forEach(pokemon => {
+                let item = document.createElement("div");
+                item.textContent = pokemon.name;
+                contenedor.appendChild(item);
+            });
         });
 }
 
-function cargarPeliculasDrama(){
-    alert("Boton peliculas pulsado")
-    fetch("http://127.0.0.1:3000/peliculass/estilo/drama")
-    .then(res=>res.json())
-    .then(res=>{
-        console.log(res)
-    });
+function cargarPeliculas() {
+    fetch("http://127.0.0.1:3000/peliculas")
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+        // declaramos la bariable contenedor en la que se guardara el resultado que ala bez se delcara en el html como id
+            let contenedor = document.getElementById("resultado");
 
-    /*
-    fetch("http://127.0.0.1:3000/")
-    app.get("/peliculass/estilo/:genero", async (req, res) => {
-        const { genero } = req.params; // Obtiene el título de la URL
-        try {
-            const { rows } = await pool.query(
-                "SELECT * FROM peliculas WHERE LOWER(genero) = LOWER($1);", [genero]
-            );
-            if (rows.length > 0) {
-                res.json(rows[0]); // Devuelve la primera película encontrada
-            } else {
-                res.status(404).json({ message: "genero no encontrada" });
-            }
-        } catch (error) {
-            res.status(500).json({ error: "Error en la consulta de la base de datos" });
+            // Limpia el contenido previo bolbiendolo a ""
+            contenedor.innerHTML = "";
+
+            // Añade cada película al contenedor
+            res.forEach(pelicula => {
+                let item = document.createElement("div"); // Crea un elemento <div> para mostrar la información de cada película.
+                item.textContent = `Título: ${res.titulo}, Género: ${res.genero}, Director: ${res.director}, Año: ${res.anio}`;
+                contenedor.appendChild(item);// Añade el <div> recién creado al contenedor.
+            });
+        });
+}
+
+
+function cargarPeliculasDrama() {
+    alert("Boton peliculas pulsado");
+    fetch("http://127.0.0.1:3000/peliculass/estilo/drama")
+    .then(res => res.json())
+    .then(res => {
+        console.log(res); // Verifica la respuesta
+
+        let contenedor = document.getElementById("resultado");
+        contenedor.innerHTML = ""; // Limpiar el contenedor
+
+        // Verifica si res es un objeto (y no un array)
+        if (res && typeof res === "object") {
+            let item = document.createElement("div");
+            item.textContent = `Título: ${res.titulo}, Género: ${res.genero}, Director: ${res.director}, Año: ${res.anio}`;
+            contenedor.appendChild(item);
+        } else {
+            console.error("La respuesta no contiene una película válida:", res);
         }
-    });
-    */
+    })
 }
