@@ -1,0 +1,22 @@
+.centro{
+    text-align: center;
+}
+
+.button {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 15px 32px; /* Espaciado interno (arriba-abajo, izquierda-derecha) */
+    text-align: center; /* Centra el texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Que se comporte como un bloque en línea */
+    font-size: 16px; /* Tamaño de la fuente */
+    border: none; /* Elimina el borde */
+    border-radius: 12px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+.button:hover {
+    background-color: #45a049; /* Color de fondo al pasar el mouse por encima */
+}
+  
