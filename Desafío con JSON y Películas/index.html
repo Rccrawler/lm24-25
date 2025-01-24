@@ -1,14 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='script.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío de Películas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <h1>Listado de Películas</h1>
+
+    <div class="filters">
+        <label for="genero-select">Filtrar por Género:</label>
+        <select id="genero-select">
+            <option value="">--Seleccionar--</option>
+            <option value="Animación">Animación</option>
+            <option value="Ciencia Ficción">Ciencia Ficción</option>
+            <option value="Romance">Romance</option>
+            <option value="Acción">Acción</option>
+        </select>
+
+        <button id="ordenar-asc">Ordenar por Año Ascendente</button>
+        <button id="ordenar-desc">Ordenar por Año Descendente</button>
+
+        <input type="text" id="buscar-titulo" placeholder="Buscar por título">
+        <button id="buscar-btn">Buscar</button>
+    </div>
+
+    <div id="mensaje" class="mensaje"></div>
+
+    <ul id="peliculas-lista"></ul>
+
+    <script src="app.js"></script>
 </body>
 </html>
