@@ -1,0 +1,113 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1c1c1c;
+    color: #fff;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #dfac40;  /* Tomate */
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    padding: 2rem;
+}
+
+#filtros {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #dfac40;
+}
+
+#filtros label {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-right: 1rem;
+}
+
+#filtros select, #filtros button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #dfac40;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#filtros select {
+    width: 200px;
+}
+
+#filtros button:hover, #filtros select:hover {
+    background-color: #dfac40; /* Rojo más intenso */
+}
+
+#accesos-rapidos button {
+    padding: 0.5rem 1.5rem;
+    margin-top: 0.5rem;
+    background-color: #444;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#accesos-rapidos button:hover {
+    background-color: #dfac40; /* Rojo */
+}
+
+/* Estilo de la lista de películas */
+#peliculas {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+#peliculas li {
+    background-color: #2f2f2f;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #444;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#peliculas li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(167, 164, 152, 0.5);
+}
+
+#peliculas li span {
+    font-weight: bold;
+}
+
+#peliculas li p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Animación de la transición del contenedor */
+#listado-peliculas {
+    transition: opacity 0.3s ease;
+}
+
