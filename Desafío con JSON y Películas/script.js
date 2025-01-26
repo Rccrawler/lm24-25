@@ -2,58 +2,63 @@
 fetch('peliculas.json')
     .then(response => response.json())
     .then(peliculas => {
-        const peliculasLista = document.getElementById('peliculas-lista');
-        const mensaje = document.getElementById('mensaje');
-        const filtroGenero = document.getElementById('genero-select');
-        const ordenarAsc = document.getElementById('ordenar-asc');
-        const ordenarDesc = document.getElementById('ordenar-desc');
-        const buscarTitulo = document.getElementById('buscar-titulo');
-        const buscarBtn = document.getElementById('buscar-btn');
+        // Elementos del DOM
+        const peliculasLista = document.getElementById('peliculas-lista'); // Lista donde se mostrarán las películas
+        const mensaje = document.getElementById('mensaje'); // Mensaje de error o informativo
+        const filtroGenero = document.getElementById('genero-select'); // Selector de género
+        const ordenarAsc = document.getElementById('ordenar-asc'); // Botón para ordenar ascendente
+        const ordenarDesc = document.getElementById('ordenar-desc'); // Botón para ordenar descendente
+        const buscarTitulo = document.getElementById('buscar-titulo'); // Input de búsqueda por título
+        const buscarBtn = document.getElementById('buscar-btn'); // Botón para realizar la búsqueda
 
-        let peliculasFiltradas = peliculas;
+        let peliculasFiltradas = peliculas; // Copia de las películas que se puede filtrar y ordenar
 
-        // Función para renderizar las películas
+        // Renderiza las películas en la lista
         function renderizarPeliculas(peliculas) {
-            peliculasLista.innerHTML = '';
+            peliculasLista.innerHTML = ''; // Limpiar lista
             if (peliculas.length === 0) {
-                mensaje.textContent = 'No se encontraron películas que coincidan con el filtro.';
+                mensaje.textContent = 'No se encontraron películas que coincidan con el filtro.'; // Mostrar mensaje si no hay resultados
             } else {
-                mensaje.textContent = '';
+                mensaje.textContent = ''; // Ocultar mensaje
                 peliculas.forEach(pelicula => {
-                    const li = document.createElement('li');
-                    li.textContent = `${pelicula.titulo} (${pelicula.año}) - Género: ${pelicula.genero}`;
-                    peliculasLista.appendChild(li);
+                    const li = document.createElement('li'); // Crear elemento de lista
+                    li.textContent = `${pelicula.titulo} (${pelicula.año}) - Género: ${pelicula.genero}`; // Añadir texto con la información
+                    peliculasLista.appendChild(li); // Añadir elemento a la lista
                 });
             }
         }
 
-        // Función para filtrar por género
+        // Filtra películas por género
         filtroGenero.addEventListener('change', (e) => {
-            const generoSeleccionado = e.target.value;
-            peliculasFiltradas = generoSeleccionado ? peliculas.filter(pelicula => pelicula.genero === generoSeleccionado) : peliculas;
-            renderizarPeliculas(peliculasFiltradas);
+            const generoSeleccionado = e.target.value; // Obtener género seleccionado
+            peliculasFiltradas = generoSeleccionado 
+                ? peliculas.filter(p => p.genero === generoSeleccionado) // Filtrar por género
+                : peliculas; // Mostrar todas si no hay filtro
+            renderizarPeliculas(peliculasFiltradas); // Renderizar resultados
         });
 
-        // Función para ordenar por año ascendente
+        // Ordenar por año ascendente
         ordenarAsc.addEventListener('click', () => {
-            peliculasFiltradas.sort((a, b) => a.año - b.año);
+            peliculasFiltradas.sort((a, b) => a.año - b.año); // Ordenar por año ascendente
             renderizarPeliculas(peliculasFiltradas);
         });
 
-        // Función para ordenar por año descendente
+        // Ordenar por año descendente
         ordenarDesc.addEventListener('click', () => {
-            peliculasFiltradas.sort((a, b) => b.año - a.año);
+            peliculasFiltradas.sort((a, b) => b.año - a.año); // Ordenar por año descendente
             renderizarPeliculas(peliculasFiltradas);
         });
 
-        // Función para buscar por título
+        // Buscar películas por título
         buscarBtn.addEventListener('click', () => {
-            const tituloBuscado = buscarTitulo.value.toLowerCase();
-            peliculasFiltradas = peliculas.filter(pelicula => pelicula.titulo.toLowerCase().includes(tituloBuscado));
-            renderizarPeliculas(peliculasFiltradas);
+            const tituloBuscado = buscarTitulo.value.toLowerCase(); // Convertir título a minúsculas para buscar
+            peliculasFiltradas = peliculas.filter(p => 
+                p.titulo.toLowerCase().includes(tituloBuscado) // Buscar coincidencias
+            );
+            renderizarPeliculas(peliculasFiltradas); // Renderizar resultados
         });
 
-        // Inicializar con todas las películas
+        // Mostrar todas las películas al iniciar
         renderizarPeliculas(peliculas);
     })
-    .catch(error => console.error('Error al cargar el archivo JSON:', error));
+    .catch(error => console.error('Error al cargar el archivo JSON:', error)); // Manejo de errores
