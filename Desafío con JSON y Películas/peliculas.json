@@ -7,5 +7,10 @@
     { "titulo": "La La Land", "genero": "Romance", "año": 2016 },
     { "titulo": "Interstellar", "genero": "Ciencia Ficción", "año": 2014 },
     { "titulo": "Spider-Man: No Way Home", "genero": "Acción", "año": 2021 },
-    { "titulo": "Frozen", "genero": "Animación", "año": 2013 }
+    { "titulo": "Frozen", "genero": "Animación", "año": 2013 },
+    { "titulo": "Shrek", "genero": "Animación", "año": 2001 },
+    { "titulo": "The Matrix Reloaded", "genero": "Ciencia Ficción", "año": 2003 },
+    { "titulo": "The Notebook", "genero": "Romance", "año": 2004 },
+    { "titulo": "Mission: Impossible – Fallout", "genero": "Acción", "año": 2018 },
+    { "titulo": "Monsters, Inc.", "genero": "Animación", "año": 2001 }
 ]
