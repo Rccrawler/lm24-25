@@ -2,63 +2,97 @@
 fetch('peliculas.json')
     .then(response => response.json())
     .then(peliculas => {
-        // Elementos del DOM
-        const peliculasLista = document.getElementById('peliculas-lista'); // Lista donde se mostrarán las películas
-        const mensaje = document.getElementById('mensaje'); // Mensaje de error o informativo
-        const filtroGenero = document.getElementById('genero-select'); // Selector de género
-        const ordenarAsc = document.getElementById('ordenar-asc'); // Botón para ordenar ascendente
-        const ordenarDesc = document.getElementById('ordenar-desc'); // Botón para ordenar descendente
-        const buscarTitulo = document.getElementById('buscar-titulo'); // Input de búsqueda por título
-        const buscarBtn = document.getElementById('buscar-btn'); // Botón para realizar la búsqueda
+        const peliculasLista = document.getElementById('peliculas-lista');
+        const mensaje = document.getElementById('mensaje');
+        const filtroGenero = document.getElementById('genero-select');
+        const ordenarAsc = document.getElementById('ordenar-asc');
+        const ordenarDesc = document.getElementById('ordenar-desc');
+        const buscarTitulo = document.getElementById('buscar-titulo');
+        const buscarBtn = document.getElementById('buscar-btn');
+        const modal = document.getElementById('trailer-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalClose = document.getElementById('modal-close');
 
-        let peliculasFiltradas = peliculas; // Copia de las películas que se puede filtrar y ordenar
+        let peliculasFiltradas = peliculas;
 
         // Renderiza las películas en la lista
         function renderizarPeliculas(peliculas) {
-            peliculasLista.innerHTML = ''; // Limpiar lista
+            peliculasLista.innerHTML = '';
             if (peliculas.length === 0) {
-                mensaje.textContent = 'No se encontraron películas que coincidan con el filtro.'; // Mostrar mensaje si no hay resultados
+                mensaje.textContent = 'No se encontraron películas que coincidan con el filtro.';
             } else {
-                mensaje.textContent = ''; // Ocultar mensaje
+                mensaje.textContent = '';
                 peliculas.forEach(pelicula => {
-                    const li = document.createElement('li'); // Crear elemento de lista
-                    li.textContent = `${pelicula.titulo} (${pelicula.año}) - Género: ${pelicula.genero}`; // Añadir texto con la información
-                    peliculasLista.appendChild(li); // Añadir elemento a la lista
+                    const li = document.createElement('li');
+                    li.classList.add('pelicula-item');
+
+                    const img = document.createElement('img');
+                    img.src = pelicula.imagen || 'placeholder.jpg';
+                    img.alt = pelicula.titulo;
+                    img.classList.add('pelicula-imagen');
+
+                    const info = document.createElement('div');
+                    info.classList.add('pelicula-info');
+                    info.innerHTML = `
+                        <h3>${pelicula.titulo} (${pelicula.año})</h3>
+                        <p>Género: ${pelicula.genero}</p>
+                    `;
+
+                    li.appendChild(img);
+                    li.appendChild(info);
+
+                    // Agregar evento para abrir el modal con el tráiler
+                    li.addEventListener('click', () => {
+                        modalContent.innerHTML = `
+                            <iframe width="100%" height="400" src="${pelicula.trailer}" 
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                            </iframe>
+                        `;
+                        modal.style.display = 'block';
+                    });
+
+                    peliculasLista.appendChild(li);
                 });
             }
         }
 
+        // Cerrar el modal
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+            modalContent.innerHTML = ''; // Limpia el contenido del iframe
+        });
+
         // Filtra películas por género
         filtroGenero.addEventListener('change', (e) => {
-            const generoSeleccionado = e.target.value; // Obtener género seleccionado
+            const generoSeleccionado = e.target.value;
             peliculasFiltradas = generoSeleccionado 
-                ? peliculas.filter(p => p.genero === generoSeleccionado) // Filtrar por género
-                : peliculas; // Mostrar todas si no hay filtro
-            renderizarPeliculas(peliculasFiltradas); // Renderizar resultados
+                ? peliculas.filter(p => p.genero.toLowerCase() === generoSeleccionado.toLowerCase())
+                : peliculas;
+            renderizarPeliculas(peliculasFiltradas);
         });
 
         // Ordenar por año ascendente
         ordenarAsc.addEventListener('click', () => {
-            peliculasFiltradas.sort((a, b) => a.año - b.año); // Ordenar por año ascendente
+            peliculasFiltradas.sort((a, b) => a.año - b.año);
             renderizarPeliculas(peliculasFiltradas);
         });
 
         // Ordenar por año descendente
         ordenarDesc.addEventListener('click', () => {
-            peliculasFiltradas.sort((a, b) => b.año - a.año); // Ordenar por año descendente
+            peliculasFiltradas.sort((a, b) => b.año - a.año);
             renderizarPeliculas(peliculasFiltradas);
         });
 
         // Buscar películas por título
         buscarBtn.addEventListener('click', () => {
-            const tituloBuscado = buscarTitulo.value.toLowerCase(); // Convertir título a minúsculas para buscar
+            const tituloBuscado = buscarTitulo.value.toLowerCase().trim();
             peliculasFiltradas = peliculas.filter(p => 
-                p.titulo.toLowerCase().includes(tituloBuscado) // Buscar coincidencias
+                p.titulo.toLowerCase().includes(tituloBuscado)
             );
-            renderizarPeliculas(peliculasFiltradas); // Renderizar resultados
+            renderizarPeliculas(peliculasFiltradas);
         });
 
         // Mostrar todas las películas al iniciar
         renderizarPeliculas(peliculas);
     })
-    .catch(error => console.error('Error al cargar el archivo JSON:', error)); // Manejo de errores
+    .catch(error => console.error('Error al cargar el archivo JSON:', error));

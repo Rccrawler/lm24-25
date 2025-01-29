@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío de Películas</title>
+    <title>Mi Netflix</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/img/fabicon.png" type="image/x-icon">
 </head>
 <body>
-    <h1>Listado de Películas</h1>
+    <div class="header">
+        <h1 class="logo">Mi<i> Netflix</i></h1>
+        <p class="subtitulo">Explora nuestras películas y series favoritas</p>
+    </div>    
 
-    <div class="filters">
-        <label for="genero-select">Filtrar por Género:</label>
-        <select id="genero-select">
-            <option value="">--Seleccionar--</option>
-            <option value="Animación">Animación</option>
-            <option value="Ciencia Ficción">Ciencia Ficción</option>
-            <option value="Romance">Romance</option>
-            <option value="Acción">Acción</option>
-        </select>
+    <main class="contenido">
+        <div class="filters">
+            <select id="genero-select">
+                <option value="">Todos los géneros</option>
+                <option value="Animación">Animación</option>
+                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                <option value="Romance">Romance</option>
+                <option value="Acción">Acción</option>
+            </select>
+        
+            <button id="ordenar-asc">Ordenar Ascendente</button>
+            <button id="ordenar-desc">Ordenar Descendente</button>
+        
+            <input type="text" id="buscar-titulo" placeholder="Buscar por título">
+            <button id="buscar-btn">Buscar</button>
+        </div>
 
-        <button id="ordenar-asc">Ordenar por Año Ascendente</button>
-        <button id="ordenar-desc">Ordenar por Año Descendente</button>
+        <p id="mensaje" class="mensaje"></p>
+        <ul id="peliculas-lista"></ul>
+    </main>
 
-        <input type="text" id="buscar-titulo" placeholder="Buscar por título">
-        <button id="buscar-btn">Buscar</button>
+    <!-- Modal para el tráiler -->
+    <div id="trailer-modal">
+        <div>
+            <button id="modal-close">&times;</button>
+            <div id="modal-content"></div>
+        </div>
     </div>
-
-    <div id="mensaje" class="mensaje"></div>
-
-    <ul id="peliculas-lista"></ul>
 
     <script src="script.js"></script>
 </body>
